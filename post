@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>{{title}}</h1>
+<img src="{{image}}" width="300">
+
+<p>{{description}}</p>
+<p>{{sellerProfile}}</p>
+<p><b>Highest Bid: ${{highestBid}}</b></p>
+
+<h2>Place Bid</h2>
+<form action="/place_bid" method="POST">
+    <input type="hidden" name="itemID" value="{{itemID}}">
+    
+    <p>Minimum bid: ${{minBid}}</p>
+    
+    $ <input type="number" name="bidPrice" placeholder="Enter your bid" step="0.50" required>
+    <br><br>
+    
+    <button type="submit">I NEED IT!!!</button>
+</form>
+
+<h2>Bids History</h2>
+<table>
+<tr><th>User</th><th>Bid</th></tr>
+
+{{bids}}
+
+</table>
+
+</body>
+</html>
