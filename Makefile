@@ -5,11 +5,15 @@ LDFLAGS = -L/usr/lib64/mysql -lmysqlclient -Wl,-rpath,/usr/lib64/mysql
 
 TARGET1 = login.cgi
 TARGET2 = profile.cgi
+TARGET3 = dbItem.cgi
+TARGET4 = dbBid.cgi
 
 SRC1 = main.cpp
 SRC2 = profile.cpp
+SRC3 = dbItem.cpp
+SRC4 = dbBid.cpp
 
-all: $(TARGET1) $(TARGET2)
+all: $(TARGET1) $(TARGET2) $(TARGET3) $(TARGET4)
 
 $(TARGET1): $(SRC1)
 	$(CXX) $(CXXFLAGS) $(SRC1) -o $(TARGET1) $(LDFLAGS)
@@ -19,5 +23,13 @@ $(TARGET2): $(SRC2)
 	$(CXX) $(CXXFLAGS) $(SRC2) -o $(TARGET2) $(LDFLAGS)
 	chmod 755 $(TARGET2)
 
+$(TARGET3): $(SRC3)
+	$(CXX) $(CXXFLAGS) $(SRC3) -o $(TARGET3) $(LDFLAGS)
+	chmod 755 $(TARGET3)
+
+$(TARGET4): $(SRC4)
+	$(CXX) $(CXXFLAGS) $(SRC4) -o $(TARGET4) $(LDFLAGS)
+	chmod 755 $(TARGET4)
+
 clean:
-	rm -f $(TARGET1) $(TARGET2)
+	rm -f $(TARGET1) $(TARGET2) $(TARGET3) $(TARGET4)

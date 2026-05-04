@@ -128,39 +128,7 @@ using namespace std;
     mysql_free_result(res);
     
     }
-    void showBidForm(MYSQL * db, string email){
-    cout << "<h3> Submit a Bid</h3>" <<endl;
-
-    string query = "SELECT itemID, itemName FROM items WHERE userID != "
-                   "(SELECT userID FROM users WHERE email = '" + email + "') "
-                   "AND soldStatus = 'AVAILABLE' AND endTime > NOW();";
-
-    mysql_query(db, query.c_str());
-    MYSQL_RES* res = mysql_store_result(db);
-
-
-
-    if (mysql_num_rows(res) > 0) {
-        cout<< "<form action='dbBid.cgi' method='POST'>" <<endl;
-        cout <<"<input type='hidden' name='email' value='" << email << "'>" << endl;
-        cout <<"<label> Select an Item to Bid on: </label>" << endl;
-        cout <<"<select name='itemID'>" << endl;
-
-
-
-    while(MYSQL_ROW row = mysql_fetch_row(res)){
-        cout << "<option value'" << row[0] << "'<" << row[1] << "</option>" << endl;
-        }
-
-    cout << "</select><br>" <<endl;
-    cout << "<label> Your Bid: $</label><input type='number' step='0.01' name='bidAmount' required><br>" << endl;
-    cout << "<input type='submit' value='Submit'>" <<endl;
-    cout << "</form>" << endl;
-    } else{
-    cout <<  "<p>Nothing is posted to bid on right now</p>" <<endl;
-    }
-    mysql_free_result(res);
-    }
+    
 
 
 
@@ -203,24 +171,9 @@ int main(){
     cout << "        <center>" << endl;
     cout << "            <H1>welcome to our wonderful website, " << username << "!</H1>" << endl;
     cout << "            <H2>enjoy your stay :D</H2>" << endl;
-    cout << "		 <a href='/~sabr/'>Logout</a>";
-    cout << "		 <h3>Selling Something?</h3>" << endl;
-    cout << "		 <form action='dbItem.cgi' method='POST'>" << endl;
-    cout << "    	 <input type='hidden' name='email' value='" << email << "'>" << endl;
-    cout << "    	 <label>Item: </label><input type='text' name='itemName' required><br>" << endl;
-    cout << " 		 <label>About the Item: </label><br>" << endl;
-    cout << "		 <label>Condition: </label>" << endl;
-    cout << "		 <select name='itemCondition' required>" << endl;
-    cout << "    	 <option value='NEW'>New</option>" << endl;
-    cout << "    	 <option value='REFURBISHED'>Refurbished</option>" << endl;
-    cout << "   	 <option value='USED'>Used</option>" << endl;
-    cout << "    	 <option value='WORN'>Worn</option>" << endl;
-    cout << "    	 <option value='BROKEN'>Broken</option>" << endl;
-    cout << "		 </select><br>" << endl;
-    cout << "		 <textarea name='itemDescription' rows '5' cols ='25'></textarea><br>" << endl;
-    cout << "            <label>Price: $</lable><input type='number' step='0.01' name='shippingPrice' required><br>" << endl;
-    cout << " 		 <input type='submit' value='Post'>" << endl;
-    cout << "	     </form>" << endl;
+    cout << "            <p><a href='auth.html'>logout</a></p>" << endl;
+    cout << "		 <h3> Lookin' to Sell? </h3>" << endl;
+    cout << "		 <form action ='dbInput.c
     cout << "        </center>" << endl;
 
     
@@ -236,5 +189,5 @@ int main(){
     mysql_close(database);
     return 0;
     //if your reading this, please for the love of god help me.
-    //written by yours truly, cookau <3 (everything becides the html, that was mostly burke)
+    //written by yours truly, cookau <3
 }
