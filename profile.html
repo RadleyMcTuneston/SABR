@@ -1,13 +1,206 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>[[username]] - SABR Site</title>
-    </head>
+<head>
+    <title>[[username]] - SABR Site</title>
 
-    <body>
-        <center>
-            <H1>welcome to our wonderful website, [[username]]!</H2>
-            <H2>enjoy your stay :D</H2>
-            <p><a href="auth.html">logout</a></p>
-        </center>
-    </body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .tab {
+            display: none;
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        button {
+            padding: 10px;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+
+        .post-card {
+            border: 1px solid black;
+            padding: 15px;
+            margin: 15px auto;
+            width: 320px;
+        }
+    </style>
+</head>
+
+<body>
+
+<center>
+    <h1>welcome to our wonderful website, [[username]]!</h1>
+    <h2>enjoy your stay :D</h2>
+
+    <button onclick="showTab('available')">Available Items</button>
+    <button onclick="showTab('selling')">Selling/Sold</button>
+    <button onclick="showTab('purchased')">Purchased</button>
+    <button onclick="showTab('bidding')">Currently Bidding</button>
+    <button onclick="showTab('lost')">Lost Bids</button>
+
+    <!-- items you prolly will buy -->
+    <div id="available" class="tab active">
+
+    <h2>Available Items</h2>
+
+    <div class="post-card">
+
+        <img src="{image}" width="300">
+
+        <h2>{title}</h2>
+
+        <p>
+            <b>Largest Bid:</b> ${highestBid}
+        </p>
+
+        <p>
+            <b>Seller:</b> {UserProfile}
+        </p>
+
+        <p>
+            <b>Time Left:</b> {timeLeft}
+        </p>
+
+        <a href="/item/{itemID}">
+            View Details
+        </a>
+
+        <hr>
+        
+        <h3>Submit a Bid</h3>
+
+        <form>
+
+            <p>
+                Your Bid:
+                $
+                <input type="text" name="bidAmount">
+            </p>
+
+            <button type="submit">
+                Submit Bid
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+    <!-- rid of trash/selling -->
+    <div id="selling" class="tab">
+
+        <h2>Selling</h2>
+
+        <!-- Make post ig -->
+        <h3>Create Post</h3>
+
+        <form>
+
+            <p>
+                Item:
+                <input type="text" name="item">
+            </p>
+
+            <p>
+                About the Item:
+                <br>
+
+                <textarea
+                    name="description"
+                    rows="5"
+                    cols="40">
+                </textarea>
+            </p>
+
+            <p>
+                Condition:
+
+                <select name="condition">
+                    <option>New</option>
+                    <option>Used</option>
+                </select>
+            </p>
+
+            <p>
+                Price:
+                $
+                <input type="text" name="price">
+            </p>
+
+            <button type="submit">
+                Post
+            </button>
+
+        </form>
+
+        <hr>
+
+        <!-- USER'S CURRENT POSTS -->
+        <h3>Your Listings</h3>
+
+        <div class="post-card">
+
+            <img src="{image}" width="300">
+
+            <h2>{title}</h2>
+
+            <p>
+                <b>Highest Bid:</b> ${highestBid}
+            </p>
+
+            <p>
+                <b>Time Left:</b> {timeLeft}
+            </p>
+
+            <a href="/item/{itemID}">
+                View Details
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- wasting money/purchased -->
+    <div id="purchased" class="tab">
+        <h2>Purchased</h2>
+        <p>Items you have won are shown here.</p>
+    </div>
+
+    <!-- currently fighting others with money -->
+    <div id="bidding" class="tab">
+        <h2>Current Bids</h2>
+        <p>Items you're bidding are shown here.</p>
+    </div>
+
+    <!--bids but they lost like losers -->
+    <div id="lost" class="tab">
+        <h2>Lost Bids</h2>
+        <p>Fucking loser.</p> <!-- remember to change -->
+    </div>
+
+    <p><a href="auth.html">logout</a></p>
+</center>
+
+<script>
+function showTab(id) {
+    let tabs = document.getElementsByClassName('tab');
+
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove('active');
+    }
+
+    document.getElementById(id).classList.add('active');
+}
+</script>
+
+</body>
 </html>
